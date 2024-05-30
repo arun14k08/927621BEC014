@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage/ProductDetailsPage";
 
-createBrowserRouter([
+const Router = createBrowserRouter([
     {
         path: "/",
         element: <ProductsPage />,
@@ -12,3 +12,5 @@ createBrowserRouter([
         element: <ProductDetailsPage />,
     },
 ]);
+
+export default Router;
