@@ -8,7 +8,7 @@ const Router = createBrowserRouter([
         element: <ProductsPage />,
     },
     {
-        path: "/products/:id",
+        path: "/products/:id/:company/:category",
         element: <ProductDetailsPage />,
     },
 ]);

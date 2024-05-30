@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
 const ProductDetailsPage = () => {
-    const { id } = useParams();
+    const { id, category, company } = useParams();
     const [accessToken, setAccessToken] = useState("");
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ const ProductDetailsPage = () => {
         if (!accessToken) return;
         axios
             .get(
-                "http://20.244.56.144/test/companies/AMZ/categories/Laptop/products?top=10&minPrice=1&maxPrice=10000",
+                `http://20.244.56.144/test/companies/${company}/categories/${category}/products?top=10&minPrice=1&maxPrice=10000`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,

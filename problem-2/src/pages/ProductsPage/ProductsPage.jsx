@@ -7,7 +7,7 @@ const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const [companyName, setCompanyName] = useState("AMZ");
-    const [category, setCategory] = useState("Phone")
+    const [category, setCategory] = useState("Phone");
     useEffect(() => {
         axios
             .post("http://20.244.56.144/test/auth", {
@@ -58,11 +58,12 @@ const ProductsPage = () => {
                         <option value="AZO">AZO</option>
                     </select>
                 </label>
-                <label htmlFor="">Select Category:
-                <select
+                <label htmlFor="">
+                    Select Category:
+                    <select
                         name="componyName"
                         id=""
-                        value={companyName}
+                        value={category}
                         onChange={(ev) => setCategory(ev.target.value)}
                     >
                         <option value="Phone">Phone</option>
@@ -79,12 +80,18 @@ const ProductsPage = () => {
                             key={index}
                             className="px-4 py-2 rounded-lg bg-slate-100"
                             onClick={() =>
-                                navigate("/products/" + product.productName)
+                                navigate(
+                                    "/products/" +
+                                        product.productName +
+                                        "/" +
+                                        companyName
+                                    +"/" + category
+                                )
                             }
                         >
                             <p>Name:{product.productName}</p>
                             <img
-                                src="https://picsum.photos/seed/picsum/200/300"
+                                src="https://random.imagecdn.app/500/150"
                                 alt=""
                                 className="w-[100px] aspect-square mx-auto"
                             />
