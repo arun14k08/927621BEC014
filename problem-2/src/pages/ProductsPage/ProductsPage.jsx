@@ -7,6 +7,7 @@ const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const [companyName, setCompanyName] = useState("AMZ");
+    const [category, setCategory] = useState("Phone")
     useEffect(() => {
         axios
             .post("http://20.244.56.144/test/auth", {
@@ -23,10 +24,10 @@ const ProductsPage = () => {
     }, []);
 
     useEffect(() => {
-        if (!accessToken || !companyName) return;
+        if (!accessToken) return;
         axios
             .get(
-                `http://20.244.56.144/test/companies/${companyName}/categories/Laptop/products?top=10&minPrice=1&maxPrice=10000`,
+                `http://20.244.56.144/test/companies/${companyName}/categories/${category}/products?top=10&minPrice=1&maxPrice=10000`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -37,23 +38,39 @@ const ProductsPage = () => {
                 const { data } = response;
                 setProducts(data);
             });
-    }, [accessToken, companyName]);
+    }, [accessToken, companyName, category]);
 
     return (
         <>
-            <div>
+            <div className="py-4 px-6">
+                <label htmlFor="">
+                    Company Name:
+                    <select
+                        name="componyName"
+                        id=""
+                        value={companyName}
+                        onChange={(ev) => setCompanyName(ev.target.value)}
+                    >
+                        <option value="AMZ">AMZ</option>
+                        <option value="FLP">FLP</option>
+                        <option value="SNP">SNP</option>
+                        <option value="MYN">MYN</option>
+                        <option value="AZO">AZO</option>
+                    </select>
+                </label>
+                <label htmlFor="">Select Category:
                 <select
-                    name="componyName"
-                    id=""
-                    value={companyName}
-                    onChange={(ev) => setCompanyName(ev.target.value)}
-                >
-                    <option value="AMZ">AMZ</option>
-                    <option value="FLP">FLP</option>
-                    <option value="SNP">SNP</option>
-                    <option value="MYN">MYN</option>
-                    <option value="AZO">AZO</option>
-                </select>
+                        name="componyName"
+                        id=""
+                        value={companyName}
+                        onChange={(ev) => setCategory(ev.target.value)}
+                    >
+                        <option value="Phone">Phone</option>
+                        <option value="Computer">Computer</option>
+                        <option value="TV">TV</option>
+                        <option value="Earphone">Earphone</option>
+                    </select>
+                </label>
             </div>
             <div className="grid grid-cols-3 gap-3 bg-slate-400 px-4 py-2">
                 {products?.map((product, index) => {
